@@ -49,9 +49,9 @@ class ExporterTest(TestCase):
         self.assertEqual(expected_xml, res)
 
     def test_export_as_csv(self):
-        expected_csv = '''ID,Name,Number of Sales,Total Amount ($)
-1,Mike,7,9
-2,John,2,32\n'''
+        expected_csv = '''ID,Name,Number of Sales,Total Amount ($)\n
+1,Mike,7,9\n
+2,John,2,32\n\n'''
         res = self.exporter.export_as_csv(self.file_name + 'xml')
         self.assertEqual(expected_csv, res)
 

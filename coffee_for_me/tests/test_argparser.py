@@ -49,11 +49,13 @@ class ArgparserTest(TestCase):
     def test_argsparser_no_pos_args(self, mock_stderr):
         with self.assertRaises(SystemExit):  # catching SystemExit
             self.parser.parse_args(['-bev=Tea', '-add=Sugar'])
-        self.assertIn('Error: the following arguments are required: employee_name, employee_position',
+        self.assertIn('\x1b[31mthe following arguments are required: employee_name, employee_position'
+                      '\x1b[0m.\nRun "python coffee_for_me -h" to see help.\n',
                       mock_stderr.getvalue())
 
     @patch('sys.stderr', new_callable=StringIO)
     def test_argsparser_one_of_pos_args_missing(self, mock_stderr):
         with self.assertRaises(SystemExit):
             self.parser.parse_args(['John', '-bev=Tea', '-add=Sugar'])
-        self.assertIn('Error: the following arguments are required: employee_position', mock_stderr.getvalue())
+        self.assertIn('\x1b[31mthe following arguments are required: employee_position'
+                      '\x1b[0m.\nRun "python coffee_for_me -h" to see help.\n', mock_stderr.getvalue())

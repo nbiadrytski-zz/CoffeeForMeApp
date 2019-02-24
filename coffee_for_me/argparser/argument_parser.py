@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import logging
+from coffee_for_me.functions.colors import Colors
 
 logger = logging.getLogger('main.argparsing.argparser.argument_parser.ArgumentParser')
 
@@ -32,7 +33,7 @@ class ArgumentParser(argparse.ArgumentParser):
         parser.add_argument('position', type=str, nargs=1, metavar='employee_position', default=None,
                             help='Employee position (Salesperson or Manager)')
         parser.add_argument('-bev', '--beverage', action='append', default=None,
-                            help='List of available beverages a Salesperson can sell: tea, coffee_for_me, water, soda, etc.')
+                            help='List of available beverages a Salesperson can sell: tea, coffee, water, soda, etc.')
         parser.add_argument('-add', '--addition', action='append', default=None,
                             help='List of available ingredients a Salesperson can add: sugar, milk, cinnamon, etc.')
 
@@ -50,7 +51,8 @@ class ArgumentParser(argparse.ArgumentParser):
             message (str): message name.
         """
         logger.error('obligatory args were not supplied bu user: {} - {}'.format(self.prog, message))
-        self.exit(0, '{} Error: {}.\nRun "coffee_for_me -h" to see help.\n'.format(self.prog, message))
+        self.exit(0, '{}: {}.\nRun "python coffee_for_me -h" to see help.\n'.
+                  format(self.prog, Colors.RED + message + Colors.RESET))
 
     @staticmethod
     def quit_msg(name, position):
@@ -62,5 +64,6 @@ class ArgumentParser(argparse.ArgumentParser):
             name (str): Employee name.
             position (str): valid Employee position (Salesperson or Manager).
         """
-        print('"{}" with "{}" position is not a valid employee.'.format(name, position))
+        print('{} with {} position is not a valid employee.'.
+              format(Colors.RED + name + Colors.RESET, Colors.RED + position + Colors.RESET))
         print('Available positions: Salesperson or Manager')

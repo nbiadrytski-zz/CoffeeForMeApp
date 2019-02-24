@@ -4,9 +4,9 @@ from coffee_for_me.employees.salesperson import Salesperson
 from coffee_for_me.argparser.argument_parser import ArgumentParser
 from coffee_for_me.functions.db_funcs import create_table, is_table_empty
 from coffee_for_me.functions.functions import get_employee_position
+from coffee_for_me.functions.colors import Colors
 import logging
 import sys
-# Koly2a3 Salesperson -bev=Water -bev=Soda -add=Sugar -add=Salt
 
 
 def main():
@@ -61,20 +61,24 @@ def main():
     # detecting if employee is a salesperson
     elif get_employee_position(args) == 'salesperson':
         try:
-            salesperson = Salesperson(args.name[0], args.position[0], args.beverage, args.addition)
-            logger.info('Created Salesperson instance: {}'.format(salesperson.__str__()))
-            salesperson.employee_greeting('\nYou can sell beverages and ingredients\n')
-            logger.debug('Greeted {}'.format(salesperson.__str__()))
-            while salesperson.user_choice(salesperson_choice_msg, 3) == 1:
-                create_table()
-                logger.info('DB table created: {}'.format(salesperson.fullname))
-                salesperson.make_sale(args.beverage, args.addition)
-                logger.info('{} made a sale'.format(salesperson.fullname))
-                salesperson.view_records()
-                logger.info('Salesperson {} is viewing personal sales records'.format(salesperson.fullname))
+            if args.beverage and args.addition:
+                salesperson = Salesperson(args.name[0], args.position[0], args.beverage, args.addition)
+                logger.info('Created Salesperson instance: {}'.format(salesperson.__str__()))
+                salesperson.employee_greeting('\nYou can sell beverages and ingredients\n')
+                logger.debug('Greeted {}'.format(salesperson.__str__()))
+                while salesperson.user_choice(salesperson_choice_msg, 3) == 1:
+                    create_table()
+                    logger.info('DB table created: {}'.format(salesperson.fullname))
+                    salesperson.make_sale(args.beverage, args.addition)
+                    logger.info('{} made a sale'.format(salesperson.fullname))
+                    salesperson.view_records()
+                    logger.info('Salesperson {} is viewing personal sales records'.format(salesperson.fullname))
+                else:
+                    print('Bye-Bye, {}! See you next time'.format(args.name[0]))
+                    logger.info('Salesperson {} decided to quit the app'.format(salesperson.fullname))
             else:
-                print('Bye-Bye, {}! See you next time'.format(args.name[0]))
-                logger.info('Salesperson {} decided to quit the app'.format(salesperson.fullname))
+                print('Provide both', Colors.GREEN + 'beverage(s)' + Colors.RESET, 'and ' + Colors.GREEN
+                      + 'ingredient(s)' + Colors.RESET, 'as command line arguments! See Help above.')
         except NameError:
             logger.error('Non-salesperson object is trying to access salesperson stuff...')
     else:
