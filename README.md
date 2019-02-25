@@ -1,9 +1,9 @@
-##CoffeeForMe
+## CoffeeForMe
 Sell beverages and view/export sales records with CoffeeForMe command-line application.
 
 Supports _Python 3.6+_. Only builtin modules are used.
 
-####Description
+#### Description
 There are 2 roles in the app: **Salesperson** and **Manager**.
 
 Salesperson can sell _beverages_ (e.g. Tea, Coffee, Water, Soda, etc.) and _ingredients_ (e.g. Sugar, Milk, Cinnamon, etc.). Once the sale is done, salesperson's sales details will be printed and stored at project root inside **salesperson_records** folder with file name **FirstName LastName_records.txt**.
@@ -33,7 +33,7 @@ optional arguments:
 Thank you for using "CoffeeForMe" App!
 ```
 
-####Installation
+#### Installation
 1. Clone the repository.
 2. Run ```pip3 install -e .``` from project root folder to install the app in development mode (if on Windows OS you will probably have to run ```python pip install -e .``` .
 ```
@@ -47,12 +47,12 @@ Installing collected packages: coffee-for-me
 Successfully installed coffee-for-me
 ```
 
-####Usage
+#### Usage
 1. As a Salesperson run ```python3 coffee_for_me Tony Salesperson -bev=Tea -bev=Coffee -bev=Water -add=Sugar -add=Milk -add=Cinnamon``` to make a sale. Where ```Tony``` is a salesperson's name, ```Salesperson ``` is an employee position, ```-bev=``` is a beverage and ```-add=``` is an ingredient.  You can provide any number of beverages and ingredients arguments.
 2. As a Manager run ```python3 coffee_for_me Anna Manager``` to view and export sales records. Where ```Anna``` is a manager's name and ```Manager``` is an employee position.
 3. Run ```python3 coffee_for_me -h```  to see Help.
 
-####Run unit tests
+#### Run unit tests
 _Note_: Python builtin module ```unittest``` was used for test creation and running.
 1. From project root folder navigate to ```cd /coffee_for_me/tests```
 2. Run ```python3 -m unittest -b```.
@@ -92,7 +92,7 @@ Ran 58 tests in 0.160s
 FAILED (failures=1)
 ```
 
-####Salesperson usage example
+#### Salesperson usage example
 ```
 Hi Liza! You are a salesperson.
 You can sell beverages and ingredients
@@ -130,7 +130,7 @@ Your choice is 2
 Bye-Bye, Liza! See you next time
 ```
 
-####Manager usage example
+#### Manager usage example
 ```
 Hi James! You are a manager.
 You can view and export sales records
